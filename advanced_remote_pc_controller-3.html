@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090d18">
+<title>Advanced Remote PC Controller</title>
+<style>
+:root{--bg:#080c16;--panel:#111a2b;--panel2:#0d1423;--line:#24334d;--txt:#edf4ff;--muted:#91a2bd;--cyan:#53d9f5;--blue:#628bff;--green:#45d6a1;--red:#ff647c;--amber:#ffc76a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -10%,#17345a 0,transparent 42%),var(--bg);color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:980px;margin:auto;padding:18px 14px 40px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.brand{display:flex;gap:12px;align-items:center}.logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,var(--cyan),var(--blue));display:grid;place-items:center;color:#07111f;font-size:23px;font-weight:900;box-shadow:0 8px 30px #53d9f533}
+h1{font-size:18px;margin:0}.sub{font-size:11px;color:var(--muted);margin-top:3px}.status{font-size:11px;border:1px solid var(--line);padding:7px 10px;border-radius:30px;color:var(--amber);white-space:nowrap}.status.on{color:var(--green);border-color:#24664f}
+.card{background:linear-gradient(145deg,#121d30ee,#0d1422ee);border:1px solid var(--line);border-radius:18px;padding:15px;margin:12px 0;box-shadow:0 12px 35px #0003}
+.cardhead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}.card h2{font-size:15px;margin:0}.hint{font-size:11px;color:var(--muted);line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.stat{background:var(--panel2);border:1px solid var(--line);border-radius:13px;padding:12px;min-width:0}.stat b{display:block;font-size:18px;margin-top:6px}.stat span{font-size:11px;color:var(--muted)}
+label{display:block;color:var(--muted);font-size:12px;margin:9px 0 6px}input,select,textarea{width:100%;background:#080f1d;border:1px solid #2a3b58;color:var(--txt);border-radius:11px;padding:12px;font:inherit;outline:none}input:focus,textarea:focus{border-color:var(--cyan)}
+button{border:0;border-radius:11px;padding:11px 13px;font:600 13px inherit;cursor:pointer;color:#06111d;background:linear-gradient(110deg,var(--cyan),#8b9cff);transition:.18s}
+button:active{transform:scale(.98)}button.secondary{background:#1a2941;color:var(--txt);border:1px solid var(--line)}button.danger{background:#512333;color:#ffdce2;border:1px solid #8e4053}button.green{background:#164333;color:#baffdf;border:1px solid #277456}
+button:disabled{opacity:.45;cursor:not-allowed}.row{display:flex;gap:8px;align-items:center}.row>*{flex:1;min-width:0}.nav{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:15px 0}.nav button{background:#101a2a;color:var(--muted);border:1px solid var(--line);padding:10px 4px;font-size:11px}.nav button.active{color:var(--cyan);border-color:#36718c;background:#102538}
+.page{display:none}.page.active{display:block}.pad{height:205px;background:linear-gradient(145deg,#0b1424,#15243b);border:1px dashed #426080;border-radius:15px;display:grid;place-items:center;touch-action:none;user-select:none;color:#8fa6c5;margin:10px 0}.pad strong{display:block;color:var(--cyan);font-size:14px}.keyrow{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.keyrow button{flex:1;min-width:60px}.small{font-size:10px;color:var(--muted);line-height:1.7}.notice{padding:11px;border-radius:12px;background:#18253a;border:1px solid #304665;color:#c4d4eb;font-size:11px;line-height:1.8;margin-top:10px}.notice.warn{border-color:#72562e;background:#2b2418;color:#ffe0a6}.notice.good{border-color:#24664f;background:#10291f;color:#baffdf}
+.timer{font-size:25px;font-weight:800;letter-spacing:1px;color:var(--cyan);text-align:center;padding:9px}
+footer{text-align:center;color:#647793;font-size:10px;margin-top:22px}
+@media(min-width:700px){.grid.two{grid-template-columns:1fr 1fr}.maincols{display:grid;grid-template-columns:1.2fr .8fr;gap:12px}.maincols .card{margin:12px 0}.pad{height:240px}}
+@media(max-width:420px){.stats{grid-template-columns:repeat(2,1fr)}.nav{grid-template-columns:repeat(4,1fr)}h1{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+ <div class="brand"><div class="logo">R</div><div><h1>ADVANCED REMOTE PC</h1><div class="sub">REMOTE CONTROLLER · ANDROID / WINDOWS 11</div></div></div>
+ <div id="status" class="status">● غير متصل</div>
+</header>
+
+<section class="card">
+ <div class="cardhead"><h2>ربط الكمبيوتر · Device Pairing</h2><span class="hint">01 / CONNECT</span></div>
+ <div class="stat" style="margin-bottom:12px">
+  <span>رقم الاقتران الخاص بهذا الجهاز · YOUR DEVICE ID</span>
+  <div class="row" style="align-items:center;margin-top:5px">
+   <b id="myDeviceId" style="font-size:25px;letter-spacing:2px;color:var(--cyan)">--------</b>
+   <button class="secondary" style="flex:0 0 auto" onclick="copyDeviceId()">نسخ الرقم</button>
+  </div>
+  <div class="small">أرسل هذا الرقم للجهاز الثاني ليتمكن من التعرف على جهازك.</div>
+ </div>
+ <label>رمز الاقتران · PAIRING CODE</label>
+ <input id="pair" type="password" inputmode="numeric" placeholder="أدخل رمز الاقتران الذي يظهر على الجهاز الآخر">
+ <div class="row" style="margin-top:11px"><button id="connectBtn" onclick="connectPC()">اقتران</button><button class="secondary" onclick="disconnectPC()">قطع الاتصال</button></div>
+ <div class="small" id="connMsg">أدخل رمز الاقتران ثم اضغط «اقتران». إعداد الاتصال يتم من برنامج Windows Companion.</div>
+</section>
+
+<div class="stats">
+ <div class="stat"><span>CPU Usage</span><b id="cpu">--%</b></div>
+ <div class="stat"><span>RAM Usage</span><b id="ram">--%</b></div>
+ <div class="stat"><span>Battery</span><b id="battery">--%</b></div>
+ <div class="stat"><span>PC Name</span><b id="pcname" style="font-size:14px">--</b></div>
+ <div class="stat"><span>Windows</span><b id="windows" style="font-size:14px">--</b></div>
+ <div class="stat"><span>Internet</span><b id="internetStatus" style="font-size:14px">--</b></div>
+</div>
+
+<nav class="nav">
+ <button class="active" onclick="showPage('mouse',this)">🖱 Mouse</button>
+ <button onclick="showPage('keyboard',this)">⌨ Keyboard</button>
+ <button onclick="showPage('power',this)">⏻ Power</button>
+ <button onclick="showPage('system',this)">▦ System</button>
+</nav>
+
+<section id="mouse" class="page active">
+ <div class="card">
+  <div class="cardhead"><h2>الماوس عن بُعد · Remote Mouse</h2><span class="hint">MOUSE</span></div>
+  <div class="row"><button id="mouseToggle" class="green" onclick="toggleFeature('mouse',this)">تفعيل الماوس</button><button class="secondary" onclick="send('mouse_click',{button:'right'})">زر يمين</button></div>
+  <div id="pad" class="pad"><div style="text-align:center"><strong>TOUCH AREA</strong><span class="small">حرّك إصبعك هنا لتحريك مؤشر الكمبيوتر عند الاتصال</span></div></div>
+  <div class="row"><button onclick="send('mouse_click',{button:'left'})">نقرة يسار</button><button onclick="send('mouse_double_click',{})">نقر مزدوج</button><button onclick="send('mouse_scroll',{delta:120})">تمرير ↑</button></div>
+  <div class="notice">حركة المؤشر تُرسل إلى برنامج Windows المرافق عند الاتصال. هذه الصفحة وحدها لا تستطيع التحكم بنظام Windows.</div>
+ </div>
+ <div class="card">
+  <div class="cardhead"><h2>لوحة اللمس · Touchpad</h2></div>
+  <div class="row"><button class="secondary" onclick="send('touchpad_set',{enabled:true})">تفعيل</button><button class="danger" onclick="send('touchpad_set',{enabled:false})">تعطيل</button></div>
+  <label>مدة التعطيل بالثواني</label><input id="touchSeconds" type="number" min="1" max="3600" value="60">
+  <button style="width:100%;margin-top:8px" onclick="timedCommand('touchpad_disable','touchSeconds')">تعطيل مؤقت ثم استعادة تلقائية</button>
+ </div>
+</section>
+
+<section id="keyboard" class="page">
+ <div class="card">
+  <div class="cardhead"><h2>لوحة المفاتيح · Remote Keyboard</h2></div>
+  <button id="keyboardToggle" class="green" style="width:100%" onclick="toggleFeature('keyboard',this)">تفعيل لوحة المفاتيح</button>
+  <label>اكتب النص لإرساله إلى الكمبيوتر</label><textarea id="typeText" rows="4" placeholder="اكتب هنا..."></textarea>
+  <button style="width:100%;margin-top:8px" onclick="sendText()">إرسال النص</button>
+  <div class="keyrow">
+   <button class="secondary" onclick="sendKey('ENTER')">Enter</button><button class="secondary" onclick="sendKey('ESC')">Esc</button><button class="secondary" onclick="sendKey('TAB')">Tab</button><button class="secondary" onclick="sendKey('BACKSPACE')">⌫</button>
+  </div>
+  <div class="keyrow">
+   <button class="secondary" onclick="sendKey('CTRL')">Ctrl</button><button class="secondary" onclick="sendKey('ALT')">Alt</button><button class="secondary" onclick="sendKey('SHIFT')">Shift</button>
+  </div>
+  <div class="notice warn">لا يتم إرسال النص إلا إلى الكمبيوتر المقترن والمصادق عليه.</div>
+ </div>
+</section>
+
+<section id="power" class="page">
+ <div class="card">
+  <div class="cardhead"><h2>مؤقت إيقاف التشغيل · Shutdown Timer</h2></div>
+  <label>المدة بالثواني</label><input id="shutdownSeconds" type="number" min="10" max="86400" value="350">
+  <div class="timer" id="shutdownPreview">00:05:50</div>
+  <div class="row"><button onclick="startShutdown()">جدولة إيقاف التشغيل</button><button class="secondary" onclick="cancelShutdown()">إلغاء المؤقت</button></div>
+  <div class="notice warn">سيطلب التطبيق تأكيداً قبل إرسال أمر إيقاف التشغيل. يجب أن يدعم Windows Companion الإلغاء والاستعادة.</div>
+ </div>
+ <div class="card">
+  <div class="cardhead"><h2>إدارة الإدخال · Input Safety</h2></div>
+  <div class="notice">لمنع قفل الكمبيوتر بالخطأ، لا تتضمن هذه النسخة تعطيل أجهزة الإدخال الفعلية على مستوى Windows. يمكن إضافة وضع تركيز آمن ومؤقت بعد تجهيز آلية استعادة مستقلة واختبارها.</div>
+ </div>
+ <div class="card">
+  <div class="cardhead"><h2>الإنترنت · Internet Control</h2></div>
+  <div class="row"><button class="danger" onclick="confirmInternet(false)">طلب فصل الإنترنت</button><button class="green" onclick="confirmInternet(true)">طلب إعادة الاتصال</button></div>
+  <div class="small">يجب أن يطلب برنامج الكمبيوتر صلاحية المسؤول عند الحاجة، وأن يؤكد العملية قبل تنفيذها.</div>
+ </div>
+</section>
+
+<section id="system" class="page">
+ <div class="card">
+  <div class="cardhead"><h2>معلومات النظام · System Information</h2><button class="secondary" onclick="send('get_system_info',{})">تحديث</button></div>
+  <div class="grid two">
+   <div class="stat"><span>اسم الكمبيوتر</span><b id="sysName" style="font-size:14px">--</b></div>
+   <div class="stat"><span>نظام التشغيل</span><b id="sysOS" style="font-size:14px">--</b></div>
+   <div class="stat"><span>CPU</span><b id="sysCPU" style="font-size:14px">--</b></div>
+   <div class="stat"><span>RAM</span><b id="sysRAM" style="font-size:14px">--</b></div>
+   <div class="stat"><span>Storage</span><b id="sysStorage" style="font-size:14px">--</b></div>
+   <div class="stat"><span>Connection</span><b id="sysConnection" style="font-size:14px">غير متصل</b></div>
+  </div>
+ </div>
+</section>
+
+<footer>ADVANCED REMOTE PC CONTROLLER · FRONT-END STARTER · BUILD 0.2</footer>
+</div>
+<script>
+let socket=null, mouseEnabled=false, keyboardEnabled=false, shutdownInterval=null;
+const $=id=>document.getElementById(id);
+
+function makeDeviceId(){
+ let id=localStorage.getItem('arc_device_id');
+ if(!/^\d{10}$/.test(id||'')){
+  const a=new Uint32Array(1);
+  if(window.crypto&&crypto.getRandomValues) crypto.getRandomValues(a); else a[0]=Math.floor(Math.random()*4294967295);
+  id=String(1000000000+(a[0]%9000000000));
+  localStorage.setItem('arc_device_id',id);
+ }
+ $('myDeviceId').textContent=id;
+}
+function copyDeviceId(){let id=$('myDeviceId').textContent;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(id).then(()=>alert('تم نسخ رقم جهازك.')).catch(()=>alert('رقم جهازك: '+id))}else{alert('رقم جهازك: '+id)}}
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+function setStatus(on){$('status').textContent=on?'● متصل':'● غير متصل';$('status').classList.toggle('on',on);$('sysConnection').textContent=on?'متصل':'غير متصل'}
+function connectPC(){
+ const url=window.REMOTE_PC_SERVER || '', code=$('pair').value.trim(), myId=$('myDeviceId').textContent;
+ if(!code){alert('أدخل رمز الاقتران أولاً.');return}
+ if(!url){alert('واجهة عنوان الخادم مخفية كما طلبت. سيُضبط الاتصال تلقائياً عند تجهيز Windows Companion.');return}
+ if(!url.startsWith('wss://')&&!url.startsWith('ws://')){alert('تم إخفاء عنوان الخادم من الواجهة. يلزم إعداد خادم الاتصال داخل نسخة Windows Companion قبل تفعيل الاقتران الحقيقي.');return}
+ try{
+  socket=new WebSocket(url);
+  socket.onopen=()=>{socket.send(JSON.stringify({type:'pair',device_id:myId,pairing_code:code,client:'android-web-ui'}));$('connMsg').textContent='تم فتح قناة الاتصال؛ بانتظار مصادقة برنامج الكمبيوتر...';};
+  socket.onmessage=e=>{let m;try{m=JSON.parse(e.data)}catch{return}if(m.type==='paired'&&m.ok){setStatus(true);$('connMsg').textContent='تم التحقق والاتصال بالكمبيوتر.'}if(m.type==='system_info')updateSystem(m.data||{});if(m.type==='error')$('connMsg').textContent='خطأ: '+(m.message||'تعذر تنفيذ الطلب')};
+  socket.onerror=()=>{$('connMsg').textContent='تعذر الاتصال بالخادم. تحقق من تشغيل Windows Companion.'};
+  socket.onclose=()=>{setStatus(false);$('connMsg').textContent='انقطع الاتصال.'};
+ }catch(e){alert('تعذر إنشاء الاتصال: '+e.message)}
+}
+function disconnectPC(){if(socket)socket.close();setStatus(false)}
+function send(type,data){if(!socket||socket.readyState!==WebSocket.OPEN){alert('اتصل ببرنامج Windows أولاً.');return}if(!$('status').classList.contains('on')){alert('لم تتم مصادقة الجهاز بعد.');return}socket.send(JSON.stringify({type,...data}));}
+function toggleFeature(which,btn){if(which==='mouse'){mouseEnabled=!mouseEnabled;btn.textContent=mouseEnabled?'إيقاف الماوس':'تفعيل الماوس'}else{keyboardEnabled=!keyboardEnabled;btn.textContent=keyboardEnabled?'إيقاف لوحة المفاتيح':'تفعيل لوحة المفاتيح'}btn.classList.toggle('green',which==='mouse'?mouseEnabled:keyboardEnabled);send('feature_set',{feature:which,enabled:which==='mouse'?mouseEnabled:keyboardEnabled})}
+function sendText(){if(!keyboardEnabled){alert('فعّل لوحة المفاتيح أولاً.');return}let text=$('typeText').value;if(text)send('keyboard_text',{text})}
+function sendKey(key){if(!keyboardEnabled){alert('فعّل لوحة المفاتيح أولاً.');return}send('keyboard_key',{key})}
+function timedCommand(command,id){let n=Number($(id).value);if(!Number.isInteger(n)||n<1||n>3600){alert('أدخل مدة بين 1 و3600 ثانية.');return}if(confirm('تأكيد تنفيذ العملية لمدة '+n+' ثانية؟'))send('timed_command',{command,duration_seconds:n})}
+function startShutdown(){let n=Number($('shutdownSeconds').value);if(!Number.isInteger(n)||n<10||n>86400){alert('أدخل مدة بين 10 و86400 ثانية.');return}if(confirm('سيتم جدولة إيقاف تشغيل الكمبيوتر بعد '+n+' ثانية. هل تريد المتابعة؟'))send('shutdown_schedule',{delay_seconds:n})}
+function cancelShutdown(){if(confirm('إرسال طلب إلغاء إيقاف التشغيل؟'))send('shutdown_cancel',{})}
+function confirmInternet(enabled){if(confirm(enabled?'طلب إعادة اتصال الكمبيوتر بالإنترنت؟':'طلب فصل اتصال الكمبيوتر بالإنترنت؟'))send('internet_set',{enabled})}
+function updateSystem(d){const pairs={cpu:['cpu','cpu'],ram:['ram','ram'],battery:['battery','battery'],pcname:['pc_name','pc_name'],windows:['os','os'],internetStatus:['internet','internet'],sysName:['pc_name','pc_name'],sysOS:['os','os'],sysCPU:['cpu_name','cpu_name'],sysRAM:['ram_total','ram_total'],sysStorage:['storage','storage']};for(const [id,[k]] of Object.entries(pairs))if(d[k]!==undefined)$(id).textContent=d[k];}
+makeDeviceId();
+const pad=$('pad');let last=null;
+pad.addEventListener('pointerdown',e=>{if(!mouseEnabled)return;last={x:e.clientX,y:e.clientY};pad.setPointerCapture(e.pointerId)});
+pad.addEventListener('pointermove',e=>{if(!mouseEnabled||!last)return;let dx=e.clientX-last.x,dy=e.clientY-last.y;last={x:e.clientX,y:e.clientY};if(Math.abs(dx)+Math.abs(dy)>1)send('mouse_move',{dx,dy})});
+pad.addEventListener('pointerup',()=>last=null);pad.addEventListener('pointercancel',()=>last=null);
+function preview(){let n=Math.max(0,Number($('shutdownSeconds').value)||0),m=Math.floor(n/60),s=n%60,h=Math.floor(m/60);$('shutdownPreview').textContent=[h,m%60,s].map(v=>String(v).padStart(2,'0')).join(':')}
+$('shutdownSeconds').addEventListener('input',preview);preview();
+</script>
+</body></html>
