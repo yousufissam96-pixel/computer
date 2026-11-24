@@ -1,0 +1,379 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: https://gorgeous-chebakia-f2a88e.netlify.app/
+Subject: Advanced Remote PC Controller
+Date: Thu, 19 Nov 2026 20:24:35 GMT
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--fwbdrzcIhEHlUkXfkEiooahhCYPQrhCBJGN7sCE0md----"
+
+
+------MultipartBoundary--fwbdrzcIhEHlUkXfkEiooahhCYPQrhCBJGN7sCE0md----
+Content-Type: text/html
+Content-ID: <frame-ED5A8E8FD2DCEE68791C2BDED264877A@mhtml.blink>
+Content-Transfer-Encoding: binary
+Content-Location: https://gorgeous-chebakia-f2a88e.netlify.app/
+
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" type="text/css" href="cid:css-c178c1d0-bed3-47db-bcdd-471c5d371c3c@mhtml.blink" />
+
+<!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=loops&utm_source=ai-legible&utm_medium=owned&utm_content=comment&utm_id=abd93a10-02e0-4374-bc7b-5417ffacf52a
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090d18">
+<title>Advanced Remote PC Controller</title>
+
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+ <div class="brand"><div class="logo">R</div><div><h1>ADVANCED REMOTE PC</h1><div class="sub">REMOTE CONTROLLER · ANDROID / WINDOWS 11</div></div></div>
+ <div id="status" class="status">● غير متصل</div>
+</header>
+
+<section class="card">
+ <div class="cardhead"><h2>ربط الكمبيوتر · Device Pairing</h2><span class="hint">01 / CONNECT</span></div>
+ <div class="stat" style="margin-bottom:12px">
+  <span>رقم الاقتران الخاص بهذا الجهاز · YOUR DEVICE ID</span>
+  <div class="row" style="align-items:center;margin-top:5px">
+   <b id="myDeviceId" style="font-size:25px;letter-spacing:2px;color:var(--cyan)">84923449</b>
+   <button class="secondary" style="flex:0 0 auto">نسخ الرقم</button>
+  </div>
+  <div class="small">أرسل هذا الرقم للجهاز الثاني حتى يستطيع طلب الاقتران معك.</div>
+ </div>
+ <label>رقم الجهاز الآخر · OTHER DEVICE ID</label>
+ <input id="pcid" inputmode="numeric" placeholder="اكتب رقم الجهاز الذي تريد الاقتران به">
+ <label>رمز الاقتران · PAIRING CODE</label>
+ <input id="pair" type="password" inputmode="numeric" placeholder="أدخل رمز الاقتران الذي يظهر على الجهاز الآخر">
+ <details style="margin-top:10px;color:var(--muted);font-size:12px">
+  <summary style="cursor:pointer">إعداد الاتصال المتقدم</summary>
+  <label>عنوان خادم Windows · Server Address</label>
+  <input id="server" placeholder="wss://عنوان-الخادم:المنفذ">
+ </details>
+ <div class="row" style="margin-top:11px"><button id="connectBtn">طلب الاقتران</button><button class="secondary">قطع الاتصال</button></div>
+ <div class="small" id="connMsg">رقم جهازك للتعريف فقط. أدخل رقم الجهاز الآخر ورمز الاقتران، ثم اتصل بخادم Windows Companion بعد تشغيله.</div>
+</section>
+
+<div class="stats">
+ <div class="stat"><span>CPU Usage</span><b id="cpu">--%</b></div>
+ <div class="stat"><span>RAM Usage</span><b id="ram">--%</b></div>
+ <div class="stat"><span>Battery</span><b id="battery">--%</b></div>
+ <div class="stat"><span>PC Name</span><b id="pcname" style="font-size:14px">--</b></div>
+ <div class="stat"><span>Windows</span><b id="windows" style="font-size:14px">--</b></div>
+ <div class="stat"><span>Internet</span><b id="internetStatus" style="font-size:14px">--</b></div>
+</div>
+
+<nav class="nav">
+ <button class="active">🖱 Mouse</button>
+ <button>⌨ Keyboard</button>
+ <button>⏻ Power</button>
+ <button>▦ System</button>
+</nav>
+
+<section id="mouse" class="page active">
+ <div class="card">
+  <div class="cardhead"><h2>الماوس عن بُعد · Remote Mouse</h2><span class="hint">MOUSE</span></div>
+  <div class="row"><button id="mouseToggle" class="green">تفعيل الماوس</button><button class="secondary">زر يمين</button></div>
+  <div id="pad" class="pad"><div style="text-align:center"><strong>TOUCH AREA</strong><span class="small">حرّك إصبعك هنا لتحريك مؤشر الكمبيوتر عند الاتصال</span></div></div>
+  <div class="row"><button>نقرة يسار</button><button>نقر مزدوج</button><button>تمرير ↑</button></div>
+  <div class="notice">حركة المؤشر تُرسل إلى برنامج Windows المرافق عند الاتصال. هذه الصفحة وحدها لا تستطيع التحكم بنظام Windows.</div>
+ </div>
+ <div class="card">
+  <div class="cardhead"><h2>لوحة اللمس · Touchpad</h2></div>
+  <div class="row"><button class="secondary">تفعيل</button><button class="danger">تعطيل</button></div>
+  <label>مدة التعطيل بالثواني</label><input id="touchSeconds" type="number" min="1" max="3600" value="60">
+  <button style="width:100%;margin-top:8px">تعطيل مؤقت ثم استعادة تلقائية</button>
+ </div>
+</section>
+
+<section id="keyboard" class="page">
+ <div class="card">
+  <div class="cardhead"><h2>لوحة المفاتيح · Remote Keyboard</h2></div>
+  <button id="keyboardToggle" class="green" style="width:100%">تفعيل لوحة المفاتيح</button>
+  <label>اكتب النص لإرساله إلى الكمبيوتر</label><textarea id="typeText" rows="4" placeholder="اكتب هنا..."></textarea>
+  <button style="width:100%;margin-top:8px">إرسال النص</button>
+  <div class="keyrow">
+   <button class="secondary">Enter</button><button class="secondary">Esc</button><button class="secondary">Tab</button><button class="secondary">⌫</button>
+  </div>
+  <div class="keyrow">
+   <button class="secondary">Ctrl</button><button class="secondary">Alt</button><button class="secondary">Shift</button>
+  </div>
+  <div class="notice warn">لا يتم إرسال النص إلا إلى الكمبيوتر المقترن والمصادق عليه.</div>
+ </div>
+</section>
+
+<section id="power" class="page">
+ <div class="card">
+  <div class="cardhead"><h2>مؤقت إيقاف التشغيل · Shutdown Timer</h2></div>
+  <label>المدة بالثواني</label><input id="shutdownSeconds" type="number" min="10" max="86400" value="350">
+  <div class="timer" id="shutdownPreview">00:05:50</div>
+  <div class="row"><button>جدولة إيقاف التشغيل</button><button class="secondary">إلغاء المؤقت</button></div>
+  <div class="notice warn">سيطلب التطبيق تأكيداً قبل إرسال أمر إيقاف التشغيل. يجب أن يدعم Windows Companion الإلغاء والاستعادة.</div>
+ </div>
+ <div class="card">
+  <div class="cardhead"><h2>إدارة الإدخال · Input Safety</h2></div>
+  <div class="notice">لمنع قفل الكمبيوتر بالخطأ، لا تتضمن هذه النسخة تعطيل أجهزة الإدخال الفعلية على مستوى Windows. يمكن إضافة وضع تركيز آمن ومؤقت بعد تجهيز آلية استعادة مستقلة واختبارها.</div>
+ </div>
+ <div class="card">
+  <div class="cardhead"><h2>الإنترنت · Internet Control</h2></div>
+  <div class="row"><button class="danger">طلب فصل الإنترنت</button><button class="green">طلب إعادة الاتصال</button></div>
+  <div class="small">يجب أن يطلب برنامج الكمبيوتر صلاحية المسؤول عند الحاجة، وأن يؤكد العملية قبل تنفيذها.</div>
+ </div>
+</section>
+
+<section id="system" class="page">
+ <div class="card">
+  <div class="cardhead"><h2>معلومات النظام · System Information</h2><button class="secondary">تحديث</button></div>
+  <div class="grid two">
+   <div class="stat"><span>اسم الكمبيوتر</span><b id="sysName" style="font-size:14px">--</b></div>
+   <div class="stat"><span>نظام التشغيل</span><b id="sysOS" style="font-size:14px">--</b></div>
+   <div class="stat"><span>CPU</span><b id="sysCPU" style="font-size:14px">--</b></div>
+   <div class="stat"><span>RAM</span><b id="sysRAM" style="font-size:14px">--</b></div>
+   <div class="stat"><span>Storage</span><b id="sysStorage" style="font-size:14px">--</b></div>
+   <div class="stat"><span>Connection</span><b id="sysConnection" style="font-size:14px">غير متصل</b></div>
+  </div>
+ </div>
+</section>
+
+<footer>ADVANCED REMOTE PC CONTROLLER · FRONT-END STARTER · BUILD 0.1</footer>
+</div>
+
+
+<iframe id="nl-badge-frame" title="Powered by Netlify" src="cid:frame-6027B9A24159C4BCDBAC74B7EBE42FF8@mhtml.blink" style="position: fixed; bottom: 0px; right: 0px; border: 0px; margin: 0px; padding: 0px; background: transparent; color-scheme: dark; z-index: 2147483645; width: 198px; height: 63px; clip-path: path(&quot;M 3 3 H 185 V 50 H 3 Z&quot;);" data-nl-ready="1"></iframe></body></html>
+------MultipartBoundary--fwbdrzcIhEHlUkXfkEiooahhCYPQrhCBJGN7sCE0md----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: cid:css-c178c1d0-bed3-47db-bcdd-471c5d371c3c@mhtml.blink
+
+@charset "utf-8";
+
+:root { --bg: #080c16; --panel: #111a2b; --panel2: #0d1423; --line: #24334d; --txt: #edf4ff; --muted: #91a2bd; --cyan: #53d9f5; --blue: #628bff; --green: #45d6a1; --red: #ff647c; --amber: #ffc76a; }
+
+* { box-sizing: border-box; }
+
+body { margin: 0px; background: radial-gradient(ellipse at 80% -10%,#17345a 0,transparent 42%),var(--bg); color: var(--txt); font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+
+.wrap { max-width: 980px; margin: auto; padding: 18px 14px 40px; }
+
+.top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+
+.brand { display: flex; gap: 12px; align-items: center; }
+
+.logo { width: 46px; height: 46px; border-radius: 15px; background: linear-gradient(135deg,var(--cyan),var(--blue)); display: grid; place-items: center; color: rgb(7, 17, 31); font-size: 23px; font-weight: 900; box-shadow: rgba(83, 217, 245, 0.2) 0px 8px 30px; }
+
+h1 { font-size: 18px; margin: 0px; }
+
+.sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+.status { font-size: 11px; border: 1px solid var(--line); padding: 7px 10px; border-radius: 30px; color: var(--amber); white-space: nowrap; }
+
+.status.on { color: var(--green); border-color: rgb(36, 102, 79); }
+
+.card { background: linear-gradient(145deg, rgba(18, 29, 48, 0.933), rgba(13, 20, 34, 0.933)); border: 1px solid var(--line); border-radius: 18px; padding: 15px; margin: 12px 0px; box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 35px; }
+
+.cardhead { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 13px; }
+
+.card h2 { font-size: 15px; margin: 0px; }
+
+.hint { font-size: 11px; color: var(--muted); line-height: 1.7; }
+
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0px, 1fr)); gap: 10px; }
+
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0px, 1fr)); gap: 9px; }
+
+.stat { background: var(--panel2); border: 1px solid var(--line); border-radius: 13px; padding: 12px; min-width: 0px; }
+
+.stat b { display: block; font-size: 18px; margin-top: 6px; }
+
+.stat span { font-size: 11px; color: var(--muted); }
+
+label { display: block; color: var(--muted); font-size: 12px; margin: 9px 0px 6px; }
+
+input, select, textarea { width: 100%; background: rgb(8, 15, 29); border: 1px solid rgb(42, 59, 88); color: var(--txt); border-radius: 11px; padding: 12px; font: inherit; outline: none; }
+
+input:focus, textarea:focus { border-color: var(--cyan); }
+
+button { border: 0px; border-radius: 11px; padding: 11px 13px; cursor: pointer; color: rgb(6, 17, 29); background: linear-gradient(110deg,var(--cyan),#8b9cff); transition: 0.18s; }
+
+button:active { transform: scale(0.98); }
+
+button.secondary { background: rgb(26, 41, 65); color: var(--txt); border: 1px solid var(--line); }
+
+button.danger { background: rgb(81, 35, 51); color: rgb(255, 220, 226); border: 1px solid rgb(142, 64, 83); }
+
+button.green { background: rgb(22, 67, 51); color: rgb(186, 255, 223); border: 1px solid rgb(39, 116, 86); }
+
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.row { display: flex; gap: 8px; align-items: center; }
+
+.row > * { flex: 1 1 0%; min-width: 0px; }
+
+.nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin: 15px 0px; }
+
+.nav button { background: rgb(16, 26, 42); color: var(--muted); border: 1px solid var(--line); padding: 10px 4px; font-size: 11px; }
+
+.nav button.active { color: var(--cyan); border-color: rgb(54, 113, 140); background: rgb(16, 37, 56); }
+
+.page { display: none; }
+
+.page.active { display: block; }
+
+.pad { height: 205px; background: linear-gradient(145deg, rgb(11, 20, 36), rgb(21, 36, 59)); border: 1px dashed rgb(66, 96, 128); border-radius: 15px; display: grid; place-items: center; touch-action: none; user-select: none; color: rgb(143, 166, 197); margin: 10px 0px; }
+
+.pad strong { display: block; color: var(--cyan); font-size: 14px; }
+
+.keyrow { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 8px; }
+
+.keyrow button { flex: 1 1 0%; min-width: 60px; }
+
+.small { font-size: 10px; color: var(--muted); line-height: 1.7; }
+
+.notice { padding: 11px; border-radius: 12px; background: rgb(24, 37, 58); border: 1px solid rgb(48, 70, 101); color: rgb(196, 212, 235); font-size: 11px; line-height: 1.8; margin-top: 10px; }
+
+.notice.warn { border-color: rgb(114, 86, 46); background: rgb(43, 36, 24); color: rgb(255, 224, 166); }
+
+.notice.good { border-color: rgb(36, 102, 79); background: rgb(16, 41, 31); color: rgb(186, 255, 223); }
+
+.timer { font-size: 25px; font-weight: 800; letter-spacing: 1px; color: var(--cyan); text-align: center; padding: 9px; }
+
+footer { text-align: center; color: rgb(100, 119, 147); font-size: 10px; margin-top: 22px; }
+
+@media (min-width: 700px) {
+  .grid.two { grid-template-columns: 1fr 1fr; }
+  .maincols { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 12px; }
+  .maincols .card { margin: 12px 0px; }
+  .pad { height: 240px; }
+}
+
+@media (max-width: 420px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .nav { grid-template-columns: repeat(4, 1fr); }
+  h1 { font-size: 15px; }
+}
+------MultipartBoundary--fwbdrzcIhEHlUkXfkEiooahhCYPQrhCBJGN7sCE0md----
+Content-Type: text/html
+Content-ID: <frame-6027B9A24159C4BCDBAC74B7EBE42FF8@mhtml.blink>
+Content-Transfer-Encoding: binary
+
+<!DOCTYPE html><html class="nl-narrow" style="--nl-vw: 377px; --nl-vh: 718px;"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" type="text/css" href="cid:css-b174f27f-faff-4131-a525-3785fd1c7c0a@mhtml.blink" /><meta name="color-scheme" content="dark"></head><body>
+      <div class="nl-wrap">
+        <section class="nl-card" id="nl-card" aria-label="Build your own site on Netlify">
+          <button type="button" class="nl-icon-btn nl-tap nl-card-close" id="nl-card-close" aria-label="Close"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><path d="M4.5 4.5 11.5 11.5M11.5 4.5 4.5 11.5"></path></svg></button>
+          <h2><em>Build your own site with Netlify</em></h2>
+          <p>Describe what you want, and an AI agent designs, builds and deploys it in minutes.</p>
+          <form class="nl-prompt" action="https://app.netlify.com/start" method="get" target="_blank" rel="noopener">
+            <textarea name="prompt" rows="2" required="" maxlength="300" autocomplete="off" enterkeyhint="go" placeholder="A shop for my handmade surfboards…" aria-label="Describe the site you want to build"></textarea>
+            <button type="submit" class="nl-send nl-tap" aria-label="Build this site"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 12.75v-9.5M3.9 7.35 8 3.25l4.1 4.1"></path></svg></button>
+            
+            
+            
+            
+            
+            
+          </form>
+          <div class="nl-or"><span>or</span></div>
+          <a class="nl-drop" href="https://app.netlify.com/drop?utm_source=netlify_badge&amp;utm_campaign=loops&amp;utm_medium=owned&amp;utm_content=drop&amp;utm_id=abd93a10-02e0-4374-bc7b-5417ffacf52a" target="_blank" rel="noopener">
+            <span>Drop a site you already have</span><span class="nl-arrow" aria-hidden="true">→</span>
+          </a>
+          
+        </section>
+        <button type="button" class="nl-badge" id="nl-badge" aria-expanded="false" aria-controls="nl-card" aria-label="Powered by Netlify — build your own site">
+          <svg width="18" height="18" viewBox="-45.625 -47.625 456.25 456.25" fill="none" aria-hidden="true">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M122.608 207.222V298.975C122.608 301.415 123.574 303.775 125.317 305.518L177.467 357.668C181.06 361.261 186.932 361.261 190.525 357.668L232.675 315.519C236.268 311.926 236.268 306.053 232.675 302.434L133.119 202.878C129.231 198.99 122.608 201.726 122.608 207.222Z" fill="white"></path>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M232.675 44.8449L190.525 2.69468C186.932 -0.898228 181.06 -0.898228 177.467 2.69468L125.317 54.846C123.574 56.5889 122.608 58.922 122.608 61.362V153.115C122.608 158.584 129.231 161.346 133.119 157.459L232.675 57.9031C236.268 54.3101 236.268 48.4385 232.675 44.8187V44.8449Z" fill="white"></path>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M307.482 126.543L151.056 174.243C145.238 176.012 145.238 184.243 151.056 186.013L307.482 233.713C310.726 234.705 314.319 233.82 316.706 231.407L361.483 186.629C365.076 183.036 365.076 177.165 361.483 173.545L316.706 128.767C314.292 126.354 310.753 125.469 307.482 126.462V126.515V126.543Z" fill="white"></path>
+    <path d="M48.6878 131.481L6.52195 173.647C2.91992 177.249 2.91992 183.089 6.52195 186.691L48.6883 228.857C52.2903 232.459 58.1302 232.459 61.7322 228.857L103.898 186.691C107.5 183.089 107.5 177.249 103.898 173.647L61.7317 131.481C58.1297 127.879 52.2899 127.879 48.6878 131.481Z" fill="white"></path></svg>
+          <span><span class="nl-badge-label">Powered by</span> <span class="nl-badge-brand">Netlify</span></span>
+        </button>
+      </div>
+      
+    </body></html>
+------MultipartBoundary--fwbdrzcIhEHlUkXfkEiooahhCYPQrhCBJGN7sCE0md----
+Content-Type: text/css
+Content-Transfer-Encoding: binary
+Content-Location: cid:css-b174f27f-faff-4131-a525-3785fd1c7c0a@mhtml.blink
+
+@charset "utf-8";
+
+:root { --nl-vw: 377px; --nl-vh: 718px; }
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0px; padding: 0px; background: transparent; overflow: hidden; }
+
+body { display: flex; align-items: flex-end; justify-content: flex-end; height: 100vh; padding: 8px 18px 18px 8px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; line-height: 1.5; color: rgb(244, 249, 249); -webkit-font-smoothing: antialiased; }
+
+.nl-wrap { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; width: max-content; max-width: calc(var(--nl-vw,100vw) - 26px); }
+
+button { font-family: inherit; cursor: pointer; }
+
+:focus-visible { outline: rgb(50, 230, 226) solid 2px; outline-offset: 2px; border-radius: 6px; }
+
+.nl-icon-btn { position: relative; flex: 0 0 auto; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; border: 1px solid transparent; background: transparent; color: rgb(213, 227, 230); transition: background 0.15s, color 0.15s; }
+
+.nl-icon-btn:hover { background: rgba(255, 255, 255, 0.08); color: rgb(244, 249, 249); }
+
+.nl-tap::after { content: ""; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: max(100%, 44px); height: max(100%, 44px); }
+
+@keyframes nl-rise { 
+  0% { opacity: 0; transform: translateY(10px) scale(0.97); }
+  100% { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition: none !important; }
+}
+
+.nl-card { position: relative; display: none; width: min(340px,calc(var(--nl-vw,100vw) - 26px)); max-height: calc(var(--nl-vh,100vh) - 84px); overflow-y: auto; background: linear-gradient(rgb(19, 40, 50) 0%, rgb(14, 30, 37) 100%); border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 18px; padding: 18px; transform-origin: right bottom; animation: 0.3s cubic-bezier(0.34, 1.4, 0.4, 1) 0s 1 normal both running nl-rise; }
+
+.nl-card.open { display: block; }
+
+.nl-card-close { position: absolute; top: 10px; right: 10px; }
+
+.nl-card h2 { margin: 0px; padding-right: 30px; font-size: 16px; font-weight: 750; letter-spacing: -0.015em; line-height: 1.35; }
+
+.nl-card h2 em { font-style: normal; background: linear-gradient(90deg, rgb(50, 230, 226), rgb(77, 124, 254), rgb(154, 107, 255)) text; -webkit-text-fill-color: transparent; color: transparent; }
+
+.nl-card p { margin: 8px 0px 0px; font-size: 12.5px; color: rgb(213, 227, 230); }
+
+.nl-prompt { position: relative; margin-top: 14px; background: rgb(16, 34, 43); border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 14px; padding: 10px 12px; transition: border-color 0.15s, box-shadow 0.15s; }
+
+.nl-prompt:focus-within { border-color: rgb(5, 189, 186); box-shadow: rgba(5, 189, 186, 0.18) 0px 0px 0px 3px; }
+
+.nl-prompt textarea { display: block; width: 100%; height: 38px; resize: none; border: 0px; outline: none; background: transparent; color: rgb(244, 249, 249); font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; font-family: inherit; font-optical-sizing: inherit; font-size-adjust: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; font-language-override: inherit; font-size: 13px; line-height: 19px; padding: 0px 28px 0px 0px; }
+
+.nl-prompt textarea::placeholder { color: rgb(169, 189, 194); }
+
+.nl-send { position: absolute; right: 9px; bottom: 9px; width: 24px; height: 24px; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; border: 0px; border-radius: 50%; background: rgb(5, 189, 186); color: rgb(2, 25, 27); transition: background 0.15s; }
+
+.nl-send:hover { background: rgb(50, 230, 226); }
+
+@media (pointer: coarse) {
+  .nl-prompt textarea { font-size: 16px; line-height: 21px; height: 42px; }
+}
+
+.nl-or { display: flex; align-items: center; gap: 10px; margin: 12px 0px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgb(169, 189, 194); }
+
+.nl-or::before, .nl-or::after { content: ""; flex: 1 1 0%; height: 1px; background: rgba(255, 255, 255, 0.09); }
+
+.nl-drop { display: flex; align-items: center; justify-content: space-between; gap: 6px; text-decoration: none; background: rgb(27, 58, 69); border: 1px solid rgba(255, 255, 255, 0.09); border-radius: 10px; padding: 10px 12px; font-size: 13px; font-weight: 600; color: rgb(207, 224, 227); transition: background 0.15s, color 0.15s, border-color 0.15s; }
+
+.nl-drop:hover { background: rgb(34, 71, 83); color: rgb(244, 249, 249); border-color: rgba(50, 230, 226, 0.3); }
+
+.nl-drop .nl-arrow { transition: transform 0.18s cubic-bezier(0.34, 1.4, 0.4, 1); }
+
+.nl-drop:hover .nl-arrow { transform: translateX(3px); }
+
+.nl-badge { display: flex; align-items: center; gap: 9px; white-space: nowrap; border: 1px solid rgba(255, 255, 255, 0.09); background: linear-gradient(rgb(20, 43, 52), rgb(14, 30, 37)); color: rgb(244, 249, 249); border-radius: 999px; padding: 9px 14px 9px 11px; font-size: 13px; font-weight: 600; letter-spacing: 0.01em; transition: border-color 0.2s; }
+
+.nl-badge:hover { border-color: rgba(50, 230, 226, 0.26); }
+
+.nl-hide { display: block; width: 100%; margin-top: 10px; border: 0px; background: transparent; color: rgb(169, 189, 194); font-size: 11.5px; font-weight: 600; padding: 4px; border-radius: 8px; transition: color 0.15s; }
+
+.nl-hide:hover { color: rgb(213, 227, 230); text-decoration: underline; }
+
+.nl-badge-label { color: rgb(213, 227, 230); font-weight: 500; }
+
+.nl-badge-brand { font-weight: 750; }
+------MultipartBoundary--fwbdrzcIhEHlUkXfkEiooahhCYPQrhCBJGN7sCE0md------
